@@ -20,7 +20,7 @@ router.get('/flow001', async (req, res) => {
   return  res.json("testflow1");
 });
 
-router.post('/sap', async (req, res) => {
+router.post('/sap_GASHES', async (req, res) => {
   //-------------------------------------
   console.log('--sap--');
   console.log(req.body);
