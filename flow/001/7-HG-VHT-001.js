@@ -324,7 +324,7 @@ router.post('/HGVHT001-geteachITEM', async (req, res) => {
           let findpo = await mongodb.find(MAIN_DATA, MAIN, { "PO": input['PO'] });
           if (findpo.length > 0) {
             request.post(
-              'http://127.0.0.1:16000/HGVHT001-feedback',
+              'http://127.0.0.1:16020/HGVHT001-feedback',
               { json: { "PO": HGVHT001db['PO'], "ITEMs": HGVHT001db['inspectionItem'] } },
               function (error, response, body2) {
                 if (!error && response.statusCode == 200) {
@@ -991,7 +991,7 @@ router.post('/HGVHT001-FINISH', async (req, res) => {
     HGVHT001db['RESULTFORMAT'] === 'OCR' ||
     HGVHT001db['RESULTFORMAT'] === 'Picture' || HGVHT001db['RESULTFORMAT'] === 'Graph') {
     request.post(
-      'http://127.0.0.1:16000/FINISHtoDB',
+      'http://127.0.0.1:16020/FINISHtoDB',
       { json: HGVHT001db },
       function (error, response, body) {
         if (!error && response.statusCode == 200) {
@@ -1002,7 +1002,7 @@ router.post('/HGVHT001-FINISH', async (req, res) => {
           //------------------------------------------------------------------------------------
 
           request.post(
-            'http://127.0.0.1:16000/HGVHT001-feedback',
+            'http://127.0.0.1:16020/HGVHT001-feedback',
             { json: { "PO": HGVHT001db['PO'], "ITEMs": HGVHT001db['inspectionItem'] } },
             function (error, response, body2) {
               if (!error && response.statusCode == 200) {
