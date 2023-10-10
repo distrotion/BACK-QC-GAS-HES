@@ -12,7 +12,7 @@ let day = d;
 
 //----------------- SETUP
 
-let NAME_INS = 'TPG-MSC-001'
+let NAME_INS = 'HG-MSC-001'
 
 //----------------- DATABASE
 
@@ -158,6 +158,8 @@ router.post('/GETINtoHGMSC001', async (req, res) => {
             }
           }
         }
+        console.log(NAME_INS)
+
 
 
 

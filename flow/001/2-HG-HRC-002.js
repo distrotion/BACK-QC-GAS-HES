@@ -322,7 +322,7 @@ router.post('/HGHRC002-geteachITEM', async (req, res) => {
           let findpo = await mongodb.find(MAIN_DATA, MAIN, { "PO": input['PO'] });
           if (findpo.length > 0) {
             request.post(
-              'http://127.0.0.1:16000/HGHRC002-feedback',
+              'http://127.0.0.1:16020/HGHRC002-feedback',
               { json: { "PO": HGHRC002db['PO'], "ITEMs": HGHRC002db['inspectionItem'] } },
               function (error, response, body2) {
                 if (!error && response.statusCode == 200) {
@@ -887,7 +887,7 @@ router.post('/HGHRC002-FINISH', async (req, res) => {
     HGHRC002db['RESULTFORMAT'] === 'OCR' ||
     HGHRC002db['RESULTFORMAT'] === 'Picture' || HGHRC002db['RESULTFORMAT'] === 'Graph') {
     request.post(
-      'http://127.0.0.1:16000/FINISHtoDB',
+      'http://127.0.0.1:16020/FINISHtoDB',
       { json: HGHRC002db },
       function (error, response, body) {
         if (!error && response.statusCode == 200) {
@@ -898,7 +898,7 @@ router.post('/HGHRC002-FINISH', async (req, res) => {
           //------------------------------------------------------------------------------------
 
           request.post(
-            'http://127.0.0.1:16000/HGHRC002-feedback',
+            'http://127.0.0.1:16020/HGHRC002-feedback',
             { json: { "PO": HGHRC002db['PO'], "ITEMs": HGHRC002db['inspectionItem'] } },
             function (error, response, body2) {
               if (!error && response.statusCode == 200) {
