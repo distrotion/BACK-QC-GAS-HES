@@ -560,7 +560,7 @@ console.log("-----------")
 
 router.post('/GASHESreport', async (req, res) => {
   //-------------------------------------
-  console.log('--PHBP12report--');
+  console.log('--GASHESreport--');
   console.log(req.body);
   let input = req.body;
   //-------------------------------------
@@ -582,10 +582,12 @@ router.post('/GASHESreport', async (req, res) => {
     {
       "$gte": d,
       "$lt": dc
-    }
+    },
+    // "FINAL_ANS" : { $exists : false },
   }
 
-  output = await mongodb.find(MAIN_DATA, MAIN, out);
+  output = await mongodb.findproject(MAIN_DATA, MAIN, out,{"PO":1,"CP":1,"MATCP":1,"CUSTOMER":1,"PART":1,"PARTNAME":1,"MATERIAL":1,"CUSLOTNO":1});
+  console.log(output)
 
 
   //-------------------------------------

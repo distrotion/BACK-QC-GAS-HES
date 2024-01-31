@@ -49,6 +49,20 @@ exports.findsome = async (db_input, collection_input, input) => {
   return res;
 };
 
+exports.findproject = async (db_input, collection_input, input1,input2) => {
+
+  const client = new MongoClient(url);
+  await client.connect();
+
+  const db = client.db(db_input);
+  const collection = db.collection(collection_input);
+  let res = await collection.find(input1).limit(500).sort({ "_id": -1 }).project(input2).toArray();
+
+  await client.close();
+
+  return res;
+};
+
 exports.update = async (db_input, collection_input, input1, input2) => {
 
   const client = new MongoClient(url);
