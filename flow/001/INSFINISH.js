@@ -558,7 +558,39 @@ console.log("-----------")
   return res.json(output);
 });
 
+router.post('/GASHESreport', async (req, res) => {
+  //-------------------------------------
+  console.log('--PHBP12report--');
+  console.log(req.body);
+  let input = req.body;
+  //-------------------------------------
+  let output = [];
+  //-------------------------------------
+  var d = new Date();
+  d.setFullYear(d.getFullYear(), d.getMonth(), d.getDate() - 10);
 
+  var dc = new Date();
+  dc.setFullYear(dc.getFullYear(), dc.getMonth(), dc.getDate());
+
+  // let day = `${d.getFullYear()}-${(d.getMonth() + 1).pad(2)}-${(d.getDate()).pad(2)}`
+  // let dayC = `${dc.getFullYear()}-${(dc.getMonth() + 1).pad(2)}-${(dc.getDate()).pad(2)}`
+  // let tim = `${(d.getHours()).pad(2)}:${(d.getMinutes()).pad(2)}:${(d.getSeconds()).pad(2)}`
+
+  let out = {
+    "ALL_DONE": 'DONE',
+    "dateG":
+    {
+      "$gte": d,
+      "$lt": dc
+    }
+  }
+
+  output = await mongodb.find(MAIN_DATA, MAIN, out);
+
+
+  //-------------------------------------
+  return res.json(output);
+});
 //let objectR = Object.getOwnPropertyNames(input_S2_1)
 
 module.exports = router;
