@@ -113,7 +113,7 @@ router.post('/GETINtoHGMSC001', async (req, res) => {
   if (input['PO'] !== undefined && input['CP'] !== undefined && check['PO'] === '') {
     // let dbsap = await mssql.qurey(`select * FROM [SAPData_GW_GAS].[dbo].[tblSAPDetail] where [PO] = ${input['PO']}`);
 
-    let findPO = await mongodb.findSAP('mongodb://172.23.10.73:27017', "ORDER", "ORDER", {});
+    let findPO = await mongodb.findSAP('mongodb://172.23.10.73:27017', "ORDER", "ORDER_TEST", {});
 
     let cuslot = '';
 
@@ -168,25 +168,30 @@ router.post('/GETINtoHGMSC001', async (req, res) => {
           "PO": input['PO'] || '',
           "CP": input['CP'] || '',
           "MATCP": input['CP'] || '',
-          "QTY": dbsap ['QUANTITY'] || '',
-          "PROCESS": dbsap ['PROCESS'] || '',
-          // "CUSLOT": dbsap ['CUSLOTNO'] || '',
+          "QTY": dbsap['QUANTITY'] || '',
+          "PROCESS": dbsap['PROCESS'] || '',
+          // "CUSLOT": dbsap['CUSLOTNO'] || '',
           "CUSLOT": cuslot,
-          "TPKLOT": dbsap ['FG_CHARG'] || '',
-          "FG": dbsap ['FG'] || '',
-          "CUSTOMER": dbsap ['CUSTOMER'] || '',
-          "PART": dbsap ['PART'] || '',
-          "PARTNAME": dbsap ['PARTNAME'] || '',
-          "MATERIAL": dbsap ['MATERIAL'] || '',
+          "TPKLOT": dbsap['FG_CHARG'] || '',
+          "FG": dbsap['FG'] || '',
+          "CUSTOMER": dbsap['CUSTOMER'] || '',
+          "PART": findcp[0]['PART'] || '',
+          "PART_s": dbsap['PART'] || '',
+          "PARTNAME_s": dbsap['PARTNAME'] || '',
+          "PARTNAME": findcp[0]['PARTNAME'] || '',
+          "MATERIAL": findcp[0]['MATERIAL'] || '',
+          "MATERIAL_s": dbsap['MATERIAL'] || '',
           //---new
-          "QUANTITY": dbsap ['QUANTITY'] || '',
+          "QUANTITY": dbsap['QUANTITY'] || '',
           // "PROCESS":dbsap ['PROCESS'] || '',
-          // "CUSLOTNO": dbsap ['CUSLOTNO'] || '',
+          // "CUSLOTNO": dbsap['CUSLOTNO'] || '',
           "CUSLOTNO":  cuslot,
-          "FG_CHARG": dbsap ['FG_CHARG'] || '',
-          "PARTNAME_PO": dbsap ['PARTNAME_PO'] || '',
-          "PART_PO": dbsap ['PART_PO'] || '',
-          "CUSTNAME": dbsap ['CUSTNAME'] || '',
+          "FG_CHARG": dbsap['FG_CHARG'] || '',
+          "PARTNAME_PO": dbsap['PARTNAME_PO'] || '',
+          "PART_PO": dbsap['PART_PO'] || '',
+          "CUSTNAME_s": dbsap['CUSTNAME'] || '',
+          "CUSTNAME": findcp[0]['CUST_FULLNM'] || '',
+          "UNITSAP": dbsap['UNIT'] || '',
           //----------------------
           "ItemPick": ItemPickoutP2, //---->
           "ItemPickcode": ItemPickcodeoutP2, //---->

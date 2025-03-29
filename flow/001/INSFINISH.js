@@ -427,7 +427,7 @@ router.post('/GRAPH-recal', async (req, res) => {
   //-------------------------------------
   if (input["PO"] !== undefined && input["ITEMs"] !== undefined) {
     let feedback = await mongodb.find(MAIN_DATA, MAIN, { "PO": input['PO'] });
-
+    console.log(feedback[0]['FINAL'][input["NAME_INS"]][input["ITEMs"]])
     if (feedback.length > 0 && feedback[0]['FINAL'] != undefined && feedback[0]['FINAL'][input["NAME_INS"]] != undefined && feedback[0]['FINAL'][input["NAME_INS"]][input["ITEMs"]] != undefined) {
       // console.log(Object.keys(feedback[0]['FINAL'][NAME_INS][input["ITEMs"]]));
       let oblist = Object.keys(feedback[0]['FINAL'][input["NAME_INS"]][input["ITEMs"]]);
@@ -453,11 +453,13 @@ router.post('/GRAPH-recal', async (req, res) => {
         //-----------------core
 
         let core = 0;
+
         if (input['INTERSEC'] !== '') {
           core = parseFloat(input['INTERSEC'])
         } else {
           core = parseFloat(axis_data[axis_data.length - 1]['y'])+50
         }
+  
         console.log(axis_data[axis_data.length - 1]['y']);
         //-----------------core
         let RawPoint = [];
@@ -475,7 +477,7 @@ router.post('/GRAPH-recal', async (req, res) => {
 
           let RawData = RawPoint[0].Point1.x + (data2 / data3 * pointvalue);
           let graph_ans_X = parseFloat(RawData.toFixed(2));
-console.log("-----------")
+          console.log("-----------")
           feedback[0]['FINAL_ANS'][input["ITEMs"]] = graph_ans_X;
           feedback[0]['FINAL_ANS'][`${input["ITEMs"]}_point`] = { "x": graph_ans_X, "y": core };
 
@@ -527,7 +529,7 @@ console.log("-----------")
 
         let Xans = 0;
         let Yans = 0;
-        let x = (c[1] - c[0]) / (d1 - d2);
+        let x = (c2 - c1) / (d1 - d2);
 
 
         if (x >= 0) {
@@ -536,7 +538,7 @@ console.log("-----------")
           Xans = -x
         }
 
-        y = d1 * Xans + c[0]
+        y = d1 * Xans + c1
         Yans = y
 
         let graph_ans_X = parseFloat(Xans.toFixed(2));
