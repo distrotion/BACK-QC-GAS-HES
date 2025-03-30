@@ -120,7 +120,7 @@ router.post('/GETINtoHGHMV002', async (req, res) => {
   if (input['PO'] !== undefined && input['CP'] !== undefined && check['PO'] === '') {
     // let dbsap = await mssql.qurey(`select * FROM [SAPData_GW_GAS].[dbo].[tblSAPDetail] where [PO] = ${input['PO']}`);
 
-    let findPO = await mongodb.findSAP('mongodb://172.23.10.73:27017', "ORDER", "ORDER_TEST", {});
+    let findPO = await mongodb.findSAP('mongodb://172.23.10.73:27017', "ORDER", "ORDER", {});
 
     let cuslot = '';
 
