@@ -6,6 +6,7 @@ router.use(require("./flow/001/getmaster"));
 router.use(require("./flow/001/upqcdata"));
 router.use(require("./flow/001/INSFINISH"));
 router.use(require("./flow/001/cleardata"));
+router.use(require("./flow/001/reportlist"));
 router.use(require("./flow/001/GRAPHMASTER"));
 router.use(require("./flow/001/1-APPGASHES"));
 router.use(require("./flow/001/2-HG-HRC-002"));
