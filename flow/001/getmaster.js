@@ -155,6 +155,39 @@ router.post('/GETINSset', async (req, res) => {
 //         "PARTNAME": "",
 //         "MATERIAL": "",
 
+router.post('/GETfg', async (req, res) => {
+  //-------------------------------------
+  console.log('--GETfg--');
+  console.log(req.body);
+  let input = req.body;
+  //-------------------------------------
+  let output = {};
+  let findfg = [];
+  let findPO = [];
+  let ITEMMETHODlist = [];
+  let METHODmaster = [];
+  let MACHINEmaster = [];
+  let INSLIST = [];
+  let INSLISTans = [];
+
+
+  if (input['FG'] !== undefined ) {
+    findfg = await mongodb.find(PATTERN, PATTERN_01, { "FG": input['FG'] });
+  
+    INSLISTans = findfg
+
+    // if(findcp.length === 0 ){
+    //   findcp = await mongodb.find(PATTERN, PATTERN_01, { "FG": input['CP'] });
+    // }
+
+  }
+
+  console.log(INSLISTans);
+
+  //-------------------------------------
+  res.json(INSLISTans);
+});
+
 
 
 module.exports = router;
